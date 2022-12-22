@@ -12,9 +12,25 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class SenderServiceImpl implements SenderService {
     private final SimpMessagingTemplate simpMessagingTemplate;
+
     @Override
     public void sendMessage(MessageContent content) {
-        simpMessagingTemplate.convertAndSend(SocketUtil.WEB_SOCKET_QUEUE + content.getSenderId(),
-                content);
+
+        simpMessagingTemplate.convertAndSendToUser(SocketUtil.WEB_SOCKET_QUEUE+content.getSenderId(),SocketUtil.WEB_SOCKET_QUEUE+content.getDestID(),content);
+//        simpMessagingTemplate.convertAndSend(SocketUtil.WEB_SOCKET_QUEUE + content.getSenderId(),
+//                content);
+    }
+    @Override
+    public void uploadFile(MessageContent content) {
+
+        simpMessagingTemplate.convertAndSendToUser(SocketUtil.WEB_SOCKET_QUEUE+content.getSenderId(),SocketUtil.WEB_SOCKET_QUEUE+content.getDestID(),content);
+
+//        simpMessagingTemplate.convertAndSend(SocketUtil.WEB_SOCKET_TOPIC + "group_id",
+//                content);
+    }
+
+    @Override
+    public void sendGroupMessage(MessageContent content) {
+        simpMessagingTemplate.convertAndSendToUser(SocketUtil.WEB_SOCKET_QUEUE+content.getSenderId(),SocketUtil.WEB_SOCKET_QUEUE+content.getDestID(),content);
     }
 }

@@ -17,4 +17,15 @@ public class WebSocketRoute {
     public void verifyTransaction(@Payload MessageContent payload){
      senderService.sendMessage(payload);
     }
+
+    @MessageMapping("/file/upload")
+    public void uploadFile(@Payload MessageContent payload){
+        senderService.sendMessage(payload);
+    }
+
+    @MessageMapping("/sendGroup")
+    public void sendGroup(@Payload MessageContent payload){
+        senderService.sendGroupMessage(payload);
+    }
+
 }
