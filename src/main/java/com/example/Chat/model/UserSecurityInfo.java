@@ -1,7 +1,10 @@
 package com.example.Chat.model;
 
+import lombok.Data;
+
 import java.security.Principal;
 
+@Data
 public class UserSecurityInfo implements Principal {
 
     private String name;
