@@ -1,15 +1,16 @@
 package com.example.Chat.controller;
 
+import com.example.Chat.service.ChannelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/gateway")
+@RequestMapping("/chat-gateway")
 @RequiredArgsConstructor
 public class UserController {
 
-      private final LoginService loginService;
+      private final ChannelService channelService;
 
 
 }

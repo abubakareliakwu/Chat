@@ -1,10 +1,11 @@
 package com.example.Chat.service;
 
 import com.example.Chat.model.Channel;
-import com.example.Chat.model.GroupChannel;
+import com.example.Chat.repository.ChannelRepository;
+import com.example.Chat.repository.GroupChannelRepository;
+import com.example.Chat.util.SocketUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,13 +13,19 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ChannelServiceImpl implements ChannelService{
 
-    @Override
-    public ResponseEntity create(Channel channel) {
-        return null;
-    }
+    private final ChannelRepository channelRepository;
 
+    private  final GroupChannelRepository groupChannelRepository;
     @Override
-    public ResponseEntity createGroup(GroupChannel groupChannel) {
-        return null;
+    public Channel create(Channel channel) {
+
+        channel.setPrivateChannel(SocketUtil.WEB_SOCKET_QUEUE+channel.getPrivateChannel());
+
+        return channelRepository.save(channel);
+    }
+    @Override
+    public Channel createGroup(Channel groupChannel) {
+        groupChannel.setPrivateChannel(SocketUtil.WEB_SOCKET_TOPIC);
+        return channelRepository.save(groupChannel);
     }
 }

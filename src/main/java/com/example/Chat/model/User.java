@@ -1,12 +1,13 @@
 package com.example.Chat.model;
 
-import com.Ebra_backend.config.AbstractAuditingEntity;
+import com.example.Chat.config.AbstractAuditingEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.util.UUID;
 
 @Data

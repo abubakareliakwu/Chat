@@ -1,7 +1,6 @@
 package com.example.Chat.model;
 
-
-import com.Ebra_backend.config.AbstractAuditingEntity;
+import com.example.Chat.config.AbstractAuditingEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
