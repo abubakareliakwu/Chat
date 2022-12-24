@@ -1,31 +1,52 @@
 package com.example.Chat.service;
 
+import com.example.Chat.dto.CreateChatDTO;
 import com.example.Chat.model.Channel;
 import com.example.Chat.repository.ChannelRepository;
 import com.example.Chat.repository.GroupChannelRepository;
 import com.example.Chat.util.SocketUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ChannelServiceImpl implements ChannelService{
 
+    @Autowired
     private final ChannelRepository channelRepository;
 
-    private  final GroupChannelRepository groupChannelRepository;
     @Override
-    public Channel create(Channel channel) {
+    public Channel create(CreateChatDTO channel) {
 
-        channel.setPrivateChannel(SocketUtil.WEB_SOCKET_QUEUE+channel.getPrivateChannel());
+        Channel channel1 = new Channel();
+        channel1.setPrivateChannel(channel.getPrivateChannel());
+        channel1.setPhone(channel.getPhone());
 
-        return channelRepository.save(channel);
+        return channelRepository.save(channel1);
     }
     @Override
     public Channel createGroup(Channel groupChannel) {
-        groupChannel.setPrivateChannel(SocketUtil.WEB_SOCKET_TOPIC);
         return channelRepository.save(groupChannel);
+    }
+
+    @Override
+    public Channel getById(Long id) {
+        return channelRepository.findById(id).get();
+    }
+
+    @Override
+    public void remove(Long id) {
+       channelRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Channel> getallChat(String phone) {
+        System.out.println(phone);
+        return channelRepository.getChannel(phone);
     }
 }
