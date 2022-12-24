@@ -24,8 +24,8 @@ public class ChannelServiceImpl implements ChannelService{
     public Channel create(CreateChatDTO channel) {
 
         Channel channel1 = new Channel();
-        channel1.setPrivateChannel(channel.getPrivateChannel());
-        channel1.setPhone(channel.getPhone());
+        channel1.setSenderPhone(channel.getSenderPhone());
+        channel1.setDestPhone(channel.getDestPhone());
 
         return channelRepository.save(channel1);
     }

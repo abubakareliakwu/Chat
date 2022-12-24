@@ -13,8 +13,8 @@ public class Channel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String phone;
-    private String privateChannel; //WEB_SOCKET_QUEUE+username
+    private String senderPhone;
+    private String destPhone; 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "group_channel_id", referencedColumnName = "id", nullable = false)

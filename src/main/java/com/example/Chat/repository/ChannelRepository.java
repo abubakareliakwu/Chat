@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ChannelRepository extends JpaRepository<Channel,Long> {
 
-    Channel findAllByPhone(String phone);
-    @Query(value = "SELECT * FROM Channel C where C.phone=:phone ", nativeQuery = true)
-    List<Channel> getChannel(String phone);
+    @Query(value = "SELECT * FROM Channel C where C.sender_phone=:senderPhone ", nativeQuery = true)
+    List<Channel> getChannel(String senderPhone);
 }

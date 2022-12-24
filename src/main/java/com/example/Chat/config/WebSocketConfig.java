@@ -16,19 +16,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                                                registry) {
 
         registry.addEndpoint("/websocket")
-                .setAllowedOrigins("http://localhost:4200").withSockJS();
+                .setAllowedOrigins("http://localhost:8080").withSockJS();
 //        registry.addEndpoint("/ws-callback")
 //                .setAllowedOrigins("http://localhost:4200");
         //.addInterceptors(new HttpHandshakeInterceptor())
     }
-//http://localhost:8080/websocket/send
-//http://localhost:8080/websocket/file/upload
-//http://localhost:8080/gateway/login
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/queue/","/topic/");
-        config.setApplicationDestinationPrefixes("/");
-//    config.setUserDestinationPrefix("/users");
+        config.enableSimpleBroker("/queue","/topic");
+        config.setApplicationDestinationPrefixes("/websocket");
     }
 
     @Override

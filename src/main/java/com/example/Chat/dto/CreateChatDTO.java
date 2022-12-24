@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CreateChatDTO {
 
-    private String phone;
-    private String privateChannel;
+    private String senderPhone;
+    private String destPhone;
 }

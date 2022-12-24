@@ -5,6 +5,7 @@ import com.example.Chat.service.SenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,8 +15,10 @@ public class WebSocketRoute {
 
     private final SenderService senderService;
     @MessageMapping("/send")
-    public void verifyTransaction(@Payload MessageContent payload){
-     senderService.sendMessage(payload);
+    @SendTo("/queue/send")
+    public void verifyTransaction(@Payload MessageContent payload) throws InterruptedException {
+        Thread.sleep(3600);
+        senderService.sendMessage(payload);
     }
 
     @MessageMapping("/file/upload")
@@ -24,7 +27,9 @@ public class WebSocketRoute {
     }
 
     @MessageMapping("/sendGroup")
-    public void sendGroup(@Payload MessageContent payload){
+    @SendTo("/topic/send")
+    public void sendGroup(@Payload MessageContent payload) throws InterruptedException {
+        Thread.sleep(3600);
         senderService.sendGroupMessage(payload);
     }
 

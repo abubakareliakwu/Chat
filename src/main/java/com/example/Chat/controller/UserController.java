@@ -47,8 +47,8 @@ public class UserController {
       }
 
       @RequestMapping(value = "/getAllChat", method = RequestMethod.GET)
-      public List<Channel> getAllChat(@RequestParam String phone) throws Exception {
-            logger.info("UserController.clazz  chat: " + phone);
-            return channelService.getallChat(phone);
+      public List<Channel> getAllChat(@RequestParam String senderPhone) throws Exception {
+            logger.info("UserController.clazz  chat: " + senderPhone);
+            return channelService.getallChat(senderPhone);
       }
 }
