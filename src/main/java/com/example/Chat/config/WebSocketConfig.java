@@ -17,15 +17,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
         registry.addEndpoint("/websocket")
                 .setAllowedOrigins("http://localhost:8080").withSockJS();
-//        registry.addEndpoint("/ws-callback")
-//                .setAllowedOrigins("http://localhost:4200");
-        //.addInterceptors(new HttpHandshakeInterceptor())
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/queue","/topic");
-        config.setApplicationDestinationPrefixes("/websocket");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
